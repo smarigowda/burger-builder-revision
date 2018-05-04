@@ -16,7 +16,7 @@ const burger = props => {
                         }, [])
   // console.log(transformed);
   if(transformed.length === 0) {
-    transformed = <div>Please add ingredients</div>;
+    transformed = <div className="message">Please add ingredients</div>;
   }
   return (
     <div className={classes.Burger}>

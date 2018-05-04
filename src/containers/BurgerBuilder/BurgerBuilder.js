@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Aux from '../../hoc/Aux';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
+import Modal from '../../components/UI/Modal/Modal';
+import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 
 const INGREDIENTS_PRICE = {
   salad: 0.3,
@@ -22,9 +24,20 @@ class BurgerBuilder extends Component {
       cheese: 0,
       meat: 0,
     },
+    purchasable: false,
     totalPrice: 4
   }
 
+  updatePurchasable = ingredients => {
+    const sum = Object.keys(ingredients)
+                      .map(key => ingredients[key])
+                      .reduce((sum, ele) => {
+                          return sum + ele;
+                      }, 0);
+    const purchasable = sum > 0;
+    this.setState({ purchasable: purchasable });
+  }
+  
   addHandler = type => {
     console.log('you clicked, More ', type);
     const clonedState = { ...this.state };
@@ -33,6 +46,7 @@ class BurgerBuilder extends Component {
     clonedState.ingredients[type] = oldCount + 1;
     console.log(clonedState);
     this.setState(clonedState);
+    this.updatePurchasable(clonedState.ingredients);
   }
 
   removeHandler = type => {
@@ -40,18 +54,24 @@ class BurgerBuilder extends Component {
     const clonedState = { ...this.state };
     const oldCount = clonedState.ingredients[type];
     console.log(oldCount);
+    /* ignore coverage: 
+        can not click on a disabled button
+        just in case the user tries to enable and click
+        try it out and see how it behaves */
     if(oldCount <= 0) {
       console.log('no more ingredient...');
-      console.log(clonedState);      
+      console.log(clonedState);
       return;
     }
     clonedState.totalPrice -= INGREDIENTS_PRICE[type];
     clonedState.ingredients[type] = oldCount - 1;
     console.log(clonedState);
     this.setState(clonedState);
+    this.updatePurchasable(clonedState.ingredients);
   }
 
   render() {
+    // this.updatePurchasable();
     const disabledInfo = {
       ...this.state.ingredients
     };
@@ -61,11 +81,16 @@ class BurgerBuilder extends Component {
     }
     return (
        <Aux>
+         <Modal>
+          <OrderSummary ingredients={this.state.ingredients} />
+         </Modal>
          <Burger ingredients={this.state.ingredients}/>
          <BuildControls
+            price={this.state.totalPrice}
             addHandler={this.addHandler}
             removeHandler={this.removeHandler}
             disabledInfo={disabledInfo}
+            purchasable={this.state.purchasable}
           />
        </Aux>
     )

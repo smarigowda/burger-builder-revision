@@ -23,14 +23,14 @@ it('message should be displayed when no ingredients', () => {
   // const wrapper = shallow(<BurgerBuilder />);
   const wrapper = mount(<BurgerBuilder />);
   wrapper.setState(state);
-  wrapper.debug();
+  wrapper.debug(); //?
   expect(wrapper.find('BurgerIngredient [type="bread-top"]')).toHaveLength(1);
   expect(wrapper.find('BurgerIngredient [type="bread-bottom"]')).toHaveLength(1);
   expect(wrapper.find('BurgerIngredient [type="cheese"]')).toHaveLength(0);
   expect(wrapper.find('BurgerIngredient [type="bacon"]')).toHaveLength(0);
   expect(wrapper.find('BurgerIngredient [type="salad"]')).toHaveLength(0);
   expect(wrapper.find('BurgerIngredient [type="meat"]')).toHaveLength(0);
-  expect(wrapper.text()).toBe("Please add ingredients");
+  expect(wrapper.find('div.message').text()).toBe("Please add ingredients");
 })
 
 it('should render the burger with at least one ingredient', () => {
