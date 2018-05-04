@@ -36,7 +36,7 @@ it('message should be displayed when no ingredients', () => {
 it('should render the burger with at least one ingredient', () => {
   const state = {
     ingredients: {
-      salad: 1,
+      salad: 0,
       bacon: 0,
       cheese: 0,
       meat: 0,
@@ -45,5 +45,18 @@ it('should render the burger with at least one ingredient', () => {
   const wrapper = mount(<BurgerBuilder />);
   wrapper.setState(state);
   wrapper.debug(); //?
-  expect(wrapper.find('BurgerIngredient [type="salad"]')).toHaveLength(1);
+  expect(wrapper.find('BurgerIngredient [type="salad"]')).toHaveLength(0);
+  wrapper.find('.BuildControl .More').first().simulate('click'); 
+  wrapper.find('.BuildControl .More').first().simulate('click'); 
+  expect(wrapper.find('BurgerIngredient [type="salad"]')).toHaveLength(2);
+  wrapper.find('.BuildControl .Less').first().simulate('click');
+  wrapper.find('.BuildControl .Less').first().simulate('click');
+  expect(wrapper.find('BurgerIngredient [type="salad"]')).toHaveLength(0);
+  expect(wrapper.state().totalPrice).toBe(4);
+  // can not click on a disabled button
+  wrapper.find('.BuildControl .Less').first().simulate('click');
+  wrapper.find('.BuildControl .Less').first().simulate('click');
+  wrapper.find('.BuildControl .Less').first().simulate('click');
+  wrapper.state() //?
+  expect(wrapper.state().totalPrice).toBe(4);
 })
