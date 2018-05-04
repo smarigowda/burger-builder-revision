@@ -47,10 +47,14 @@ it('should render the burger with at least one ingredient', () => {
   wrapper.debug(); //?
   expect(wrapper.find('BurgerIngredient [type="salad"]')).toHaveLength(0);
   wrapper.find('.BuildControl .More').first().simulate('click'); 
-  expect(wrapper.find('BurgerIngredient [type="salad"]')).toHaveLength(1);
+  wrapper.find('.BuildControl .More').first().simulate('click'); 
+  expect(wrapper.find('BurgerIngredient [type="salad"]')).toHaveLength(2);
+  wrapper.find('.BuildControl .Less').first().simulate('click');
   wrapper.find('.BuildControl .Less').first().simulate('click');
   expect(wrapper.find('BurgerIngredient [type="salad"]')).toHaveLength(0);
   expect(wrapper.state().totalPrice).toBe(4);
+  // can not click on a disabled button
+  wrapper.find('.BuildControl .Less').first().simulate('click');
   wrapper.find('.BuildControl .Less').first().simulate('click');
   wrapper.find('.BuildControl .Less').first().simulate('click');
   wrapper.state() //?

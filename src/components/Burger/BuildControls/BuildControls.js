@@ -16,7 +16,8 @@ const buildControls = props => (
                 key={d.label}
                 label={d.label}
                 addHandler={ () => props.addHandler(d.type) }
-                removeHandler = { () => props.removeHandler(d.type)} />
+                removeHandler = { () => props.removeHandler(d.type)}
+                isDisabled={props.disabledInfo[d.type]} />
     })}
   </div>
 );
