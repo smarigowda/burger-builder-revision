@@ -29,7 +29,11 @@ module.exports = function (wallaby) {
       delete jestConfig.testEnvironment;
       wallaby.testFramework.configure(jestConfig);
     },
-
+  
+    hints: {
+      ignoreCoverage: /ignore coverage/ // or /istanbul ignore next/, or any RegExp
+    },
+  
     testFramework: 'jest'
   };
 };

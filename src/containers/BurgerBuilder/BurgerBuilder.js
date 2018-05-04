@@ -40,6 +40,10 @@ class BurgerBuilder extends Component {
     const clonedState = { ...this.state };
     const oldCount = clonedState.ingredients[type];
     console.log(oldCount);
+    /* ignore coverage: 
+        can not click on a disabled button
+        just in case the user tries to enable and click
+        try it out and see how it behaves */
     if(oldCount <= 0) {
       console.log('no more ingredient...');
       console.log(clonedState);      
@@ -63,6 +67,7 @@ class BurgerBuilder extends Component {
        <Aux>
          <Burger ingredients={this.state.ingredients}/>
          <BuildControls
+            price={this.state.totalPrice}
             addHandler={this.addHandler}
             removeHandler={this.removeHandler}
             disabledInfo={disabledInfo}
