@@ -60,3 +60,29 @@ it('should render the burger with at least one ingredient', () => {
   wrapper.state() //?
   expect(wrapper.state().totalPrice).toBe(4);
 })
+
+it('should show the modal', () => {
+  const state = {
+    // ingredients: {
+    //   salad: 1,
+    //   bacon: 1,
+    //   cheese: 1,
+    //   meat: 0,
+    // },
+    // purchasing: true,
+    purchasable: true,
+  };
+  const wrapper = mount(<BurgerBuilder />);
+  wrapper.setState(state);
+  wrapper.render();
+  wrapper.debug(); //?
+  wrapper.find('.OrderButton').simulate('click');
+  wrapper.state() //?
+  // wrapper.debug() //?
+  // wrapper.html() //?
+  // expect(wrapper.find('.Modal').prop('style').opacity).toBe('0');
+  // wrapper.setState({purchasing: true});
+  // wrapper.debug() //?
+  // wrapper.html() //?
+  // expect(wrapper.find('.Modal').prop('style').opacity).toBe('1');
+});
