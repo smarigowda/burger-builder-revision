@@ -63,26 +63,25 @@ it('should render the burger with at least one ingredient', () => {
 
 it('should show the modal', () => {
   const state = {
-    // ingredients: {
-    //   salad: 1,
-    //   bacon: 1,
-    //   cheese: 1,
-    //   meat: 0,
-    // },
-    // purchasing: true,
     purchasable: true,
   };
   const wrapper = mount(<BurgerBuilder />);
   wrapper.setState(state);
-  wrapper.render();
-  wrapper.debug(); //?
+  // wrapper.debug(); //?
   wrapper.find('.OrderButton').simulate('click');
   wrapper.state() //?
-  // wrapper.debug() //?
-  // wrapper.html() //?
-  // expect(wrapper.find('.Modal').prop('style').opacity).toBe('0');
-  // wrapper.setState({purchasing: true});
-  // wrapper.debug() //?
-  // wrapper.html() //?
-  // expect(wrapper.find('.Modal').prop('style').opacity).toBe('1');
+
 });
+
+it('should be able to cancel the order by clicling on backdrop', () => {
+  const state = {
+    purchasable: true, // enable Order Now button
+  };
+  const wrapper = mount(<BurgerBuilder />);
+  wrapper.setState(state);
+  wrapper.find('.OrderButton').simulate('click');
+  expect(wrapper.find('modal').props().show).toBe(true);
+  wrapper.find('div .Backdrop').simulate('click');
+  expect(wrapper.find('modal').props().show).toBe(false);
+  // wrapper.debug() //?
+})
