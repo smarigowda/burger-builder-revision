@@ -85,3 +85,20 @@ it('should be able to cancel the order by clicling on backdrop', () => {
   expect(wrapper.find('modal').props().show).toBe(false);
   // wrapper.debug() //?
 })
+
+it('should be able to CANCEL order', () => {
+  const state = {
+    purchasable: true, // enable Order Now button
+  };
+  const wrapper = mount(<BurgerBuilder />);
+  wrapper.setState(state);
+  wrapper.find('.OrderButton').simulate('click');
+  expect(wrapper.find('modal').props().show).toBe(true);
+  // wrapper.debug() //?
+  wrapper.find('button .Danger').simulate('click');
+  expect(wrapper.find('modal').props().show).toBe(false);
+  wrapper.find('button .Success').simulate('click');
+  // expect(wrapper.find('modal').props().show).toBe(true); // functionality is yet to be implemented
+  wrapper.debug() //?
+  
+})
