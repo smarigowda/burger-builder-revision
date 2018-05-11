@@ -5,7 +5,11 @@ const drawerToggle = props => {
   return (
     <div 
       onClick={props.drawerToggleClickHandler}
-      className={classes.MobileOnly}>MENU</div>
+      className={classes.DrawerToggle}>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
   )
 }
 
