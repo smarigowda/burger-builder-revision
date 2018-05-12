@@ -27,7 +27,6 @@ class Layout extends Component {
       <Aux>
         <Toolbar drawerToggleClickHandler={this.drawerToggleClickHandler}/>
         <SideDrawer show={this.state.showSideDrawer} sideDrawerClickHandler={this.sideDrawerClickHandler}/>
-        <div>Toolbar, Side Drawer, Backdrop</div>
         <main className={classes.Content}>
           {this.props.children}
         </main>
