@@ -61,7 +61,7 @@ it('should render the burger with at least one ingredient', () => {
   expect(wrapper.state().totalPrice).toBe(4);
 })
 
-it('should show the modal', () => {
+it('should show the Modal', () => {
   const state = {
     purchasable: true,
   };
@@ -80,9 +80,9 @@ it('should be able to cancel the order by clicling on backdrop', () => {
   const wrapper = mount(<BurgerBuilder />);
   wrapper.setState(state);
   wrapper.find('.OrderButton').simulate('click');
-  expect(wrapper.find('modal').props().show).toBe(true);
+  expect(wrapper.find('Modal').props().show).toBe(true);
   wrapper.find('div .Backdrop').simulate('click');
-  expect(wrapper.find('modal').props().show).toBe(false);
+  expect(wrapper.find('Modal').props().show).toBe(false);
   // wrapper.debug() //?
 })
 
@@ -93,12 +93,12 @@ it('should be able to CANCEL order', () => {
   const wrapper = mount(<BurgerBuilder />);
   wrapper.setState(state);
   wrapper.find('.OrderButton').simulate('click');
-  expect(wrapper.find('modal').props().show).toBe(true);
+  expect(wrapper.find('Modal').props().show).toBe(true);
   // wrapper.debug() //?
   wrapper.find('button .Danger').simulate('click');
-  expect(wrapper.find('modal').props().show).toBe(false);
+  expect(wrapper.find('Modal').props().show).toBe(false);
   wrapper.find('button .Success').simulate('click');
-  // expect(wrapper.find('modal').props().show).toBe(true); // functionality is yet to be implemented
+  // expect(wrapper.find('Modal').props().show).toBe(true); // functionality is yet to be implemented
   wrapper.debug() //?
   
 })
