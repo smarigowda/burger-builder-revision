@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import classes from './Modal.css';
-import Aux from '../../../hoc/Aux';
+import Aux from '../../../hoc/Aux/Aux';
 import Backdrop from '../Backdrop/Backdrop';
 
 class Modal extends Component {
   shouldComponentUpdate(nextProps, nextState) {
-    console.log('nextProps = ', nextProps);
-    console.log('nextState = ', nextState);
-    console.log('this.props = ', this.props);
+    // console.log('nextProps = ', nextProps);
+    // console.log('nextState = ', nextState);
+    // console.log('this.props = ', this.props);
     return this.props.show !== nextProps.show;
   }
   render() {
