@@ -4,7 +4,6 @@ import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
-
 import axios from '../../axios-order';
 
 const INGREDIENTS_PRICE = {
@@ -29,7 +28,8 @@ class BurgerBuilder extends Component {
     },
     purchasable: false,
     purchasing: false,
-    totalPrice: 4
+    totalPrice: 4,
+    orderPlaced: false
   }
 
   updatePurchasable = ingredients => {
@@ -105,9 +105,14 @@ class BurgerBuilder extends Component {
     axios.post('/orders.json', order)
          .then(response => {
            console.log(response);
+           this.setState({ orderPlaced: true });
          }).catch(error => {
            console.log(error);
          });
+  }
+
+  componentDidUpdate() {
+    console.log('to help comp integration test');
   }
 
   render() {
