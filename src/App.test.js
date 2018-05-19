@@ -20,9 +20,9 @@ it('renders without crashing', () => {
   ReactDOM.unmountComponentAtNode(div);
 });
 
-it('should be able to order', () => {
-  const wrapper = mount(<App />);
-  wrapper.find('.OrderButton').simulate('click');
-  wrapper.find('button .Success').simulate('click');
-  // wrapper.debug(); //?
-});
+// it('should be able to order', () => {
+//   const wrapper = mount(<App />);
+//   wrapper.find('.OrderButton').simulate('click');
+//   wrapper.find('button .Success').simulate('click');
+//   // wrapper.debug(); //?
+// });
