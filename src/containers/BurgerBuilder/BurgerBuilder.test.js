@@ -114,3 +114,15 @@ it('should be able to Place an order', async () => {
   await wrapper.instance().componentDidUpdate();
   expect(wrapper.state().orderPlaced).toBe(true);
 });
+
+it('should display spinner when loading is true', async () => {
+  const stateLoading = {
+    loading: true,
+    purchasing: true,
+  }
+  const wrapper = mount(<BurgerBuilder />);
+  expect(wrapper.find('spinner').length).toBe(0);
+  wrapper.setState(stateLoading);
+  wrapper.debug() //?
+  expect(wrapper.find('spinner').length).toBe(1);
+});
