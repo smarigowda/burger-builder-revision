@@ -6,6 +6,7 @@ import BurgerBuilder from './BurgerBuilder';
 jest.mock('../../axios-order', () => {
   return {
     post: jest.fn(() => Promise.resolve()),
+    get: jest.fn(() => Promise.resolve()),
   };
 });
 
@@ -69,6 +70,12 @@ it('should render the burger with at least one ingredient', () => {
 it('should show the Modal', () => {
   const state = {
     purchasable: true,
+    ingredients: {
+      bacon: 0,
+      cheese: 0,
+      meat: 0,
+      salad: 0
+    },
   };
   const wrapper = mount(<BurgerBuilder />);
   wrapper.setState(state);
@@ -81,6 +88,12 @@ it('should show the Modal', () => {
 it('should be able to cancel the order by clicling on backdrop', () => {
   const state = {
     purchasable: true, // enable Order Now button
+    ingredients: {
+      bacon: 0,
+      cheese: 0,
+      meat: 0,
+      salad: 0
+    },
   };
   const wrapper = mount(<BurgerBuilder />);
   wrapper.setState(state);
@@ -94,6 +107,12 @@ it('should be able to cancel the order by clicling on backdrop', () => {
 it('should be able to Cancel an order', async () => {
   const state = {
     purchasable: true, // enable Order Now button
+    ingredients: {
+      bacon: 0,
+      cheese: 0,
+      meat: 0,
+      salad: 0
+    },
   };
   const wrapper = mount(<BurgerBuilder />);
   wrapper.setState(state);
@@ -105,7 +124,13 @@ it('should be able to Cancel an order', async () => {
 
 it('should be able to Place an order', async () => {
   const state = {
-    purchasable: true, // enable Order Now button
+    purchasable: true,
+    ingredients: {
+      bacon: 0,
+      cheese: 0,
+      meat: 0,
+      salad: 0
+    }, // enable Order Now button
   };
   const wrapper = mount(<BurgerBuilder />);
   wrapper.setState(state);
@@ -117,12 +142,31 @@ it('should be able to Place an order', async () => {
 
 it('should display spinner when loading is true', async () => {
   const stateLoading = {
+    ingredients: {
+      bacon: 0,
+      cheese: 0,
+      meat: 0,
+      salad: 0
+    },
     loading: true,
     purchasing: true,
   }
+
+  const stateLoaded = {
+    ingredients: {
+      bacon: 0,
+      cheese: 0,
+      meat: 0,
+      salad: 0
+    },
+    loading: false,
+    purchasing: true,
+  }
+
   const wrapper = mount(<BurgerBuilder />);
-  expect(wrapper.find('spinner').length).toBe(0);
   wrapper.setState(stateLoading);
   wrapper.debug() //?
   expect(wrapper.find('spinner').length).toBe(1);
+  wrapper.setState(stateLoaded);
+  expect(wrapper.find('spinner').length).toBe(0);
 });
