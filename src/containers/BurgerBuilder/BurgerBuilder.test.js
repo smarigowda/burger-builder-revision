@@ -1,8 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { mount } from 'enzyme';
-
 import BurgerBuilder from './BurgerBuilder';
+
+jest.mock('../../axios-order', () => {
+  return {
+    post: jest.fn(() => Promise.resolve()),
+  };
+});
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
@@ -86,7 +91,7 @@ it('should be able to cancel the order by clicling on backdrop', () => {
   // wrapper.debug() //?
 })
 
-it('should be able to CANCEL order', () => {
+it('should be able to Cancel an order', async () => {
   const state = {
     purchasable: true, // enable Order Now button
   };
@@ -94,11 +99,18 @@ it('should be able to CANCEL order', () => {
   wrapper.setState(state);
   wrapper.find('.OrderButton').simulate('click');
   expect(wrapper.find('Modal').props().show).toBe(true);
-  // wrapper.debug() //?
   wrapper.find('button .Danger').simulate('click');
   expect(wrapper.find('Modal').props().show).toBe(false);
+});
+
+it('should be able to Place an order', async () => {
+  const state = {
+    purchasable: true, // enable Order Now button
+  };
+  const wrapper = mount(<BurgerBuilder />);
+  wrapper.setState(state);
+  wrapper.find('.OrderButton').simulate('click');
   wrapper.find('button .Success').simulate('click');
-  // expect(wrapper.find('Modal').props().show).toBe(true); // functionality is yet to be implemented
-  wrapper.debug() //?
-  
-})
+  await wrapper.instance().componentDidUpdate();
+  expect(wrapper.state().orderPlaced).toBe(true);
+});
