@@ -12,12 +12,14 @@ const withErrorHandler = (WrappedComponent, axios) => {
         this.setState({ error: null });
         return request;
       });
+      /* ignore coverage, has Cypress test */
       this.respInterceptor = axios.interceptors.response.use(response => response, error => {
         this.setState({ error: error });
       })
     }
 
     errorConfirmedHandler = () => {
+      /* ignore coverage, has Cypress test */
       this.setState({error: null});
     }
 
@@ -27,6 +29,7 @@ const withErrorHandler = (WrappedComponent, axios) => {
     }
 
     render() {
+      /* ignore coverage, has Cypress test */
       return (
         <Aux>
           <Modal show={this.state.error} purchaseCancelHandler={this.errorConfirmedHandler}>
