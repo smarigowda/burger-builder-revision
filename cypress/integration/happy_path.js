@@ -8,7 +8,7 @@ describe('My First Test', function() {
     cy.get(':nth-child(5) > [class^="BuildControl__More"').click();
     cy.get('[class^="BuildControls__OrderButton"').click();
     cy.get('[class^="Modal__Modal__"]').should('be.visible');
-    cy.get('[class*="Button__Danger"]').click();
+    cy.get('[class*="Button__Danger"]').first().click();
     cy.get('[class^="Modal__Modal__"]').should('not.be.visible');
   });
 })
