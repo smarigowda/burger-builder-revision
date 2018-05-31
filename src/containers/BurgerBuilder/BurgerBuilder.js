@@ -42,33 +42,26 @@ class BurgerBuilder extends Component {
   }
   
   addHandler = type => {
-    console.log('you clicked, More ', type);
     const clonedState = { ...this.state };
     clonedState.totalPrice += INGREDIENTS_PRICE[type];
     const oldCount = clonedState.ingredients[type];
     clonedState.ingredients[type] = oldCount + 1;
-    console.log(clonedState);
     this.setState(clonedState);
     this.updatePurchasable(clonedState.ingredients);
   }
 
   removeHandler = type => {
-    console.log('you clicked, Less', type);
     const clonedState = { ...this.state };
     const oldCount = clonedState.ingredients[type];
-    console.log(oldCount);
     /* ignore coverage: 
         can not click on a disabled button
         just in case the user tries to enable and click
         try it out and see how it behaves */
     if(oldCount <= 0) {
-      console.log('no more ingredient...');
-      console.log(clonedState);
       return;
     }
     clonedState.totalPrice -= INGREDIENTS_PRICE[type];
     clonedState.ingredients[type] = oldCount - 1;
-    console.log(clonedState);
     this.setState(clonedState);
     this.updatePurchasable(clonedState.ingredients);
   }
@@ -126,7 +119,18 @@ class BurgerBuilder extends Component {
     // postFn();
 
     /* ignore coverage, has Cypress test */
-    this.props.history.push('/checkout');
+    const queryParams = [];
+    /* ignore coverage, has Cypress test */    
+    for (let name in this.state.ingredients) {
+      queryParams.push(encodeURIComponent(name) + '=' + encodeURIComponent(this.state.ingredients[name]));
+    }
+    /* ignore coverage, has Cypress test */    
+    const queryString = queryParams.join('&');
+    /* ignore coverage, has Cypress test */    
+    this.props.history.push({
+      pathname: '/checkout',
+      search: '?' + queryString
+    });
   }
 
   componentDidUpdate() {
@@ -134,10 +138,8 @@ class BurgerBuilder extends Component {
   }
 
   componentDidMount() {
-    console.log('BurgerBuilderWithErrorHandler', this.props);
     axios.get('/ingredients.json')
          .then(response => {
-           console.log('ingredients from db = ', response);
            this.setState({ingredients: response.data});
          }).catch(error => { 
            this.setState({error: true})
@@ -150,7 +152,7 @@ class BurgerBuilder extends Component {
     };
 
     for (const key in disabledInfo ) {
-      disabledInfo[key] = disabledInfo[key] <=0; //?
+      disabledInfo[key] = disabledInfo[key] <=0;
     }
 
     let orderSummary = null;
