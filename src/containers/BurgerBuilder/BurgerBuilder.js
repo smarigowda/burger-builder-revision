@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Aux from '../../hoc/Aux/Aux';
-import Burger from '../../components/Burger/Burger';
+import { burger as Burger } from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
@@ -86,43 +86,47 @@ class BurgerBuilder extends Component {
   }
 
   purchaseContinueHandler = () => {
-    //alert('great..lets continue !');
-    // purchasing = false will close the ordersummary modal.
-    this.setState({loading: true});
+    // -- alert('great..lets continue !');
+    // -- purchasing = false will close the ordersummary modal.
 
-    const order = {
-      ingredients: this.state.ingredients,
-      price: this.state.totalPrice,
-      customer: {
-        name: 'Santosh Marigowa',
-        address: {
-          street: 'Baeconsfieldway',
-          zipCode: 'RG6 5UR',
-          country: 'UK'
-        },
-        email: 'san@gamil.com',
-      },
-      deliveryMethod: 'fastest'
-    }
+    // this.setState({loading: true});
 
-    const postFn = () => {
-      axios.post('/orders.json', order)
-        .then(response => {
-          console.log(response);
-          this.setState({
-            orderPlaced: true,
-            loading: false,
-            purchasing: false
-          });
-        }).catch(error => {
-          console.log(error);
-          this.setState({
-            loading: false,
-            purchasing: false
-          });
-        });
-    }
-    postFn();
+    // const order = {
+    //   ingredients: this.state.ingredients,
+    //   price: this.state.totalPrice,
+    //   customer: {
+    //     name: 'Santosh Marigowa',
+    //     address: {
+    //       street: 'Baeconsfieldway',
+    //       zipCode: 'RG6 5UR',
+    //       country: 'UK'
+    //     },
+    //     email: 'san@gamil.com',
+    //   },
+    //   deliveryMethod: 'fastest'
+    // }
+
+    // const postFn = () => {
+    //   axios.post('/orders.json', order)
+    //     .then(response => {
+    //       console.log(response);
+    //       this.setState({
+    //         orderPlaced: true,
+    //         loading: false,
+    //         purchasing: false
+    //       });
+    //     }).catch(error => {
+    //       console.log(error);
+    //       this.setState({
+    //         loading: false,
+    //         purchasing: false
+    //       });
+    //     });
+    // }
+    // postFn();
+
+    /* ignore coverage, has Cypress test */
+    this.props.history.push('/checkout');
   }
 
   componentDidUpdate() {
@@ -130,6 +134,7 @@ class BurgerBuilder extends Component {
   }
 
   componentDidMount() {
+    console.log('BurgerBuilderWithErrorHandler', this.props);
     axios.get('/ingredients.json')
          .then(response => {
            console.log('ingredients from db = ', response);
