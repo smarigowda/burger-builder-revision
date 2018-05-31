@@ -14,7 +14,6 @@ it('renders without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(<BurgerBuilder />, div);
   ReactDOM.unmountComponentAtNode(div);
-  
 });
 
 it('message should be displayed when no ingredients', () => {

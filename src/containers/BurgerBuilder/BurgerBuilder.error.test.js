@@ -9,7 +9,7 @@ jest.mock('../../axios-order', () => {
   };
 });
 
-it('error response should not update the state', async () => {
+it.skip('error response should not update the state', async () => {
   const state = {
     purchasable: true,
     ingredients: {
