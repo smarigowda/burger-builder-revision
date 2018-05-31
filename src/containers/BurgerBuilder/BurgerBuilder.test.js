@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import { mount } from 'enzyme';
 import BurgerBuilder from './BurgerBuilder';
 
+
 jest.mock('../../axios-order', () => {
   return {
-    post: jest.fn(() => Promise.resolve()),
     get: jest.fn(() => Promise.resolve()),
   };
 });
@@ -101,7 +101,6 @@ it('should be able to cancel the order by clicling on backdrop', () => {
   expect(wrapper.find('Modal').props().show).toBe(true);
   wrapper.find('div .Backdrop').simulate('click');
   expect(wrapper.find('Modal').props().show).toBe(false);
-  // wrapper.debug() //?
 })
 
 it('should be able to Cancel an order', async () => {
@@ -122,7 +121,7 @@ it('should be able to Cancel an order', async () => {
   expect(wrapper.find('Modal').props().show).toBe(false);
 });
 
-it.skip('should be able to Place an order', async () => {
+it('should be able to Place an order - unit test', async () => {
   const state = {
     purchasable: true,
     ingredients: {
@@ -130,14 +129,15 @@ it.skip('should be able to Place an order', async () => {
       cheese: 0,
       meat: 0,
       salad: 0
-    }, // enable Order Now button
+    },
   };
   const wrapper = mount(<BurgerBuilder />);
+  wrapper.instance().purchaseContinueHandler = jest.fn();
   wrapper.setState(state);
   wrapper.find('.OrderButton').simulate('click');
   wrapper.find('button .Success').simulate('click');
   await wrapper.instance().componentDidUpdate();
-  expect(wrapper.state().orderPlaced).toBe(true);
+  expect(wrapper.instance().purchaseContinueHandler).toBeCalled();
 });
 
 it('should display spinner when loading is true', async () => {

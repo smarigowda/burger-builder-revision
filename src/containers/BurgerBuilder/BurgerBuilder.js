@@ -124,6 +124,8 @@ class BurgerBuilder extends Component {
     //     });
     // }
     // postFn();
+
+    /* ignore coverage, has Cypress test */
     this.props.history.push('/checkout');
   }
 
