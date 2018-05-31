@@ -123,7 +123,7 @@ it('should be able to Cancel an order', async () => {
   expect(wrapper.find('Modal').props().show).toBe(false);
 });
 
-it('should be able to Place an order', async () => {
+it.skip('should be able to Place an order', async () => {
   const state = {
     purchasable: true,
     ingredients: {
