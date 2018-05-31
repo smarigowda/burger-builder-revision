@@ -29,7 +29,6 @@ it('message should be displayed when no ingredients', () => {
   // const wrapper = shallow(<BurgerBuilder />);
   const wrapper = mount(<BurgerBuilder />);
   wrapper.setState(state);
-  wrapper.debug(); //?
   expect(wrapper.find('BurgerIngredient [type="bread-top"]')).toHaveLength(1);
   expect(wrapper.find('BurgerIngredient [type="bread-bottom"]')).toHaveLength(1);
   expect(wrapper.find('BurgerIngredient [type="cheese"]')).toHaveLength(0);
@@ -50,7 +49,6 @@ it('should render the burger with at least one ingredient', () => {
   };
   const wrapper = mount(<BurgerBuilder />);
   wrapper.setState(state);
-  wrapper.debug(); //?
   expect(wrapper.find('BurgerIngredient [type="salad"]')).toHaveLength(0);
   wrapper.find('.BuildControl .More').first().simulate('click'); 
   wrapper.find('.BuildControl .More').first().simulate('click'); 
@@ -165,7 +163,6 @@ it('should display spinner when loading is true', async () => {
 
   const wrapper = mount(<BurgerBuilder />);
   wrapper.setState(stateLoading);
-  wrapper.debug() //?
   expect(wrapper.find('spinner').length).toBe(1);
   wrapper.setState(stateLoaded);
   expect(wrapper.find('spinner').length).toBe(0);
