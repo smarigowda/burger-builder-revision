@@ -1,18 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { mount } from 'enzyme';
-import { BrowserRouter, Route } from 'react-router-dom';
-// import MockRouter from 'react-mock-router';
+import { Route } from 'react-router-dom';
 import MockRouter from './mock-router';
-
 import Checkout from './Checkout';
-
-// it('renders without crashing', () => {
-//   const div = document.createElement('div');
-//   ReactDOM.render(<BrowserRouter><Checkout /></BrowserRouter>, div);
-//   ReactDOM.unmountComponentAtNode(div);
-// });
-
 
 it('click on continue', () => {
   const push = jest.fn();
@@ -33,7 +24,7 @@ it('click on cancel', () => {
   const push = jest.fn();
   const goBack = jest.fn();
   const location = {
-    search: '?bacon=1&cheese=1&meat=1&salad=1'
+    search: '?bacon=1&cheese=1&meat=1&salad=1&price=6.0'
   }
   let checkoutWrapper = mount(
     <MockRouter push={push} goBack={goBack} location={location}>

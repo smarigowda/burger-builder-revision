@@ -134,7 +134,7 @@ it('should be able to Place an order - unit test', async () => {
   wrapper.setState(state);
   wrapper.find('.OrderButton').simulate('click');
   wrapper.find('button .Success').simulate('click');
-  await wrapper.instance().componentDidUpdate();
+  // await wrapper.instance().componentDidUpdate();
   expect(wrapper.instance().purchaseContinueHandler).toBeCalled();
 });
 

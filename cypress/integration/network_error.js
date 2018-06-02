@@ -10,7 +10,7 @@ describe('My First Test', function() {
       url: '/ingredients.json',
       response: [],
       status: 404
-    })
+    });
     cy.visit('http://localhost:3000');
     cy.get('[class^="Modal__Modal"]').contains('Something did not work !');
     cy.get('[class^="Backdrop__Backdrop"]').click();
