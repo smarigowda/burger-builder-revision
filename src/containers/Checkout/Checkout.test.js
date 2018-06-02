@@ -24,7 +24,7 @@ it('click on cancel', () => {
   const push = jest.fn();
   const goBack = jest.fn();
   const location = {
-    search: '?bacon=1&cheese=1&meat=1&salad=1'
+    search: '?bacon=1&cheese=1&meat=1&salad=1&price=6.0'
   }
   let checkoutWrapper = mount(
     <MockRouter push={push} goBack={goBack} location={location}>

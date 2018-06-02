@@ -78,55 +78,13 @@ class BurgerBuilder extends Component {
     })
   }
 
-  purchaseContinueHandler = () => {
-    // -- alert('great..lets continue !');
-    // -- purchasing = false will close the ordersummary modal.
-
-    // this.setState({loading: true});
-
-    // const order = {
-    //   ingredients: this.state.ingredients,
-    //   price: this.state.totalPrice,
-    //   customer: {
-    //     name: 'Santosh Marigowa',
-    //     address: {
-    //       street: 'Baeconsfieldway',
-    //       zipCode: 'RG6 5UR',
-    //       country: 'UK'
-    //     },
-    //     email: 'san@gamil.com',
-    //   },
-    //   deliveryMethod: 'fastest'
-    // }
-
-    // const postFn = () => {
-    //   axios.post('/orders.json', order)
-    //     .then(response => {
-    //       console.log(response);
-    //       this.setState({
-    //         orderPlaced: true,
-    //         loading: false,
-    //         purchasing: false
-    //       });
-    //     }).catch(error => {
-    //       console.log(error);
-    //       this.setState({
-    //         loading: false,
-    //         purchasing: false
-    //       });
-    //     });
-    // }
-    // postFn();
-
-    /* ignore coverage, has Cypress test */
+  purchaseContinueHandler =  /* ignore coverage */ () => {
     const queryParams = [];
-    /* ignore coverage, has Cypress test */    
     for (let name in this.state.ingredients) {
       queryParams.push(encodeURIComponent(name) + '=' + encodeURIComponent(this.state.ingredients[name]));
     }
-    /* ignore coverage, has Cypress test */    
+    queryParams.push('price=' + this.state.totalPrice);
     const queryString = queryParams.join('&');
-    /* ignore coverage, has Cypress test */    
     this.props.history.push({
       pathname: '/checkout',
       search: '?' + queryString
@@ -156,8 +114,6 @@ class BurgerBuilder extends Component {
     }
 
     let orderSummary = null;
-
-
 
     let burger = this.state.error ? 'Ingredients can not be loaded' : <Spinner />
     
