@@ -31,5 +31,6 @@ describe('My First Test', function() {
     cy.get('[class*="Button__Success"]').click();
     cy.get('[class*="ContactData__ContactData"] > h1').contains('Enter your contact info');
     cy.get('form > [class*="Button__Button"]').click();
+    cy.get(':nth-child(5) > [class^="BuildControl__More"').click();
   })
 })
