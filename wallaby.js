@@ -17,10 +17,15 @@ module.exports = function (wallaby) {
       '**/*.js?(x)': wallaby.compilers.babel({})
     },
 
+    workers: {
+      recycle: true,
+    },
+
     filesWithNoCoverageCalculated: [
       'src/registerServiceWorker.js',
       'src/index.js',
-      'config/**/*.js'
+      'config/**/*.js',
+      'src/AppE2ETest.test.js',
     ],
 
     setup: function(wallaby) {
