@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import Orders from './Orders';
+import { Orders } from './Orders';
 
 jest.mock('../../axios-order', () => {
   return {
@@ -10,5 +10,5 @@ jest.mock('../../axios-order', () => {
 });
 
 it('render with mount', () => {
-  const wrapper = mount(<Orders />);
+  mount(<Orders />);
 })

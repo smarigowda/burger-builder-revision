@@ -32,5 +32,10 @@ describe('My First Test', function() {
     cy.get('[class*="ContactData__ContactData"] > h1').contains('Enter your contact info');
     cy.get('form > [class*="Button__Button"]').click();
     cy.get(':nth-child(5) > [class^="BuildControl__More"').click();
+  });
+  it.only('fetched order from firebase db', function() {
+    cy.visit('http://localhost:3000');
+    cy.get('nav[class^="Toolbar__DesktopOnly"] [href="/orders"]').click();
+    cy.get('h1').contains('Orders');
   })
 })

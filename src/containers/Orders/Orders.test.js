@@ -1,14 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { mount } from 'enzyme';
-
-import Orders from './Orders';
+import { Orders } from './Orders';
 
 jest.mock('../../axios-order', () => {
   const response = {
     data: [ 
-      { '1' : { price: 4.0 } },
-      { '2' : { price: 5.0 } },
+      { '1' : { price: 4.0, ingredients: { bacon: 0, cheese: 0, meat: 0, salad: 0 } } },
+      { '2' : { price: 5.0, ingredients: { bacon: 0, cheese: 0, meat: 0, salad: 0 } } },
     ]
   }
   return {
@@ -24,9 +23,4 @@ it('renders without crashing', () => {
 
 it('render with mount', () => {
   const wrapper = mount(<Orders />);
-  wrapper.debug(); //?
-  wrapper.state(); //?
-  wrapper.instance().componentDidMount();
-  wrapper.state(); //?
-  
 })
