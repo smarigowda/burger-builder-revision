@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Order from '../../components/Order/Order';
 import axios from '../../axios-order';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
+import { from } from 'rxjs'
 export class Orders extends Component {
   state = {
     orders: [],
@@ -9,32 +10,37 @@ export class Orders extends Component {
   }
   cancelSource = null;
   componentDidMount() {
-         axios.get('/orders.json')
-         .then(response => {
-             console.log(response);
-             const fetchedOrders = [];
-             for(let key in response.data) {
-               fetchedOrders.push({
-                 ...response.data[key],
-                 id: key
-               });
-             }
-             console.log(fetchedOrders);
-             this.setState({
-               loading: false,
-               orders: fetchedOrders
-             });
-         })
-         .catch(error => {
-           this.setState({
-               loading: false
-           });
-         });
+        const onNextHandler = response => {
+            console.log(response);
+            const fetchedOrders = [];
+            for(let key in response.data) {
+              fetchedOrders.push({
+                ...response.data[key],
+                id: key
+              });
+            }
+            console.log(fetchedOrders);
+            this.setState({
+              loading: false,
+              orders: fetchedOrders
+            });
+        }
+
+        const onErrorHandler = error => {
+          this.setState({
+            loading: false
+          })
+        }
+
+        const promise = axios.get('/orders.json');
+        const result = from(promise);
+
+        this.subscription = result.subscribe(onNextHandler, onErrorHandler);
+
   }
   componentWillUnmount() {
-    // if the http request is still in flight then we need to cancel it here
-    // may leak memory
-    // or use redux to manage the state ?
+    // to avoid memory leak
+    this.subscription.unsubscribe();
   }
   render() {
     return (
